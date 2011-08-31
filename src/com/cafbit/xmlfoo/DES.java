@@ -435,11 +435,11 @@ public class DES {
      * the same key.
      */
     public static byte[] encrypt(byte[] message, byte[] key) {
-    	// pad the ciphertext array to the next multiple of 8.
-    	int extraBytes = 0;
-    	if (message.length%8 != 0) {
-    		extraBytes = 8-(message.length%8);
-    	}
+        // pad the ciphertext array to the next multiple of 8.
+        int extraBytes = 0;
+        if (message.length%8 != 0) {
+            extraBytes = 8-(message.length%8);
+        }
         byte[] ciphertext = new byte[message.length+extraBytes];
 
         // encrypt each 8-byte (64-bit) block of the message.
@@ -565,40 +565,40 @@ public class DES {
         return sb.toString();
     }
     
-	private static final byte DEFAULT_LAME_CRYPT_KEY[] = {
-		(byte)0x2f, (byte)0x96, (byte)0xe3, (byte)0x89,
-		(byte)0x72, (byte)0x75, (byte)0x9e, (byte)0xec,
-		(byte)0x6b, (byte)0x23, (byte)0x0d, (byte)0x33,
-		(byte)0xd5, (byte)0x5c, (byte)0x22, (byte)0x1f
-	};
+    private static final byte DEFAULT_LAME_CRYPT_KEY[] = {
+        (byte)0x2f, (byte)0x96, (byte)0xe3, (byte)0x89,
+        (byte)0x72, (byte)0x75, (byte)0x9e, (byte)0xec,
+        (byte)0x6b, (byte)0x23, (byte)0x0d, (byte)0x33,
+        (byte)0xd5, (byte)0x5c, (byte)0x22, (byte)0x1f
+    };
 
-	public static String lameEncrypt(String plaintext, byte[] key) {
-		if (key == null) {
-			key = DEFAULT_LAME_CRYPT_KEY;
-		}
-		return DES.hex(DES.encrypt(plaintext.getBytes(), key));
-	}
-	
-	public static String lameDecrypt(String ciphertext, byte[] key) {
-		if (key == null) {
-			key = DEFAULT_LAME_CRYPT_KEY;
-		}
-		byte[] plain = DES.decrypt(parseBytes(ciphertext), key);
-		
-		// remove trailing zero bytes
-		byte[] trimmed = null;
-		for (int i=(plain.length-1); i>=0; i--) {
-			if ((trimmed == null) && (plain[i] != 0)) {
-				trimmed = new byte[i+1];
-			}
-			if (trimmed != null) {
-				trimmed[i] = plain[i];
-			}
-		}
-		if (trimmed == null) {
-			return "";
-		} else {
-			return new String(trimmed);
-		}
-	}
+    public static String lameEncrypt(String plaintext, byte[] key) {
+        if (key == null) {
+            key = DEFAULT_LAME_CRYPT_KEY;
+        }
+        return DES.hex(DES.encrypt(plaintext.getBytes(), key));
+    }
+    
+    public static String lameDecrypt(String ciphertext, byte[] key) {
+        if (key == null) {
+            key = DEFAULT_LAME_CRYPT_KEY;
+        }
+        byte[] plain = DES.decrypt(parseBytes(ciphertext), key);
+        
+        // remove trailing zero bytes
+        byte[] trimmed = null;
+        for (int i=(plain.length-1); i>=0; i--) {
+            if ((trimmed == null) && (plain[i] != 0)) {
+                trimmed = new byte[i+1];
+            }
+            if (trimmed != null) {
+                trimmed[i] = plain[i];
+            }
+        }
+        if (trimmed == null) {
+            return "";
+        } else {
+            return new String(trimmed);
+        }
+    }
 }

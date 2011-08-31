@@ -18,8 +18,8 @@
 package com.cafbit.xmlfoo;
 
 public class XmlFooException extends Exception {
-	private static final long serialVersionUID = -3123355580007791630L;
-	private static final String DEFAULT_MESSAGE =
+    private static final long serialVersionUID = -3123355580007791630L;
+    private static final String DEFAULT_MESSAGE =
         "A problem occured while storing or retreiving XML data.";
     
     public XmlFooException() {
